@@ -1,58 +1,352 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Production-Grade Kubernetes Platform on AWS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Overview
 
-## About Laravel
+This project demonstrates how to build a production-ready Kubernetes platform on AWS using Infrastructure as Code (Terraform), Amazon EKS, Helm, and Kubernetes best practices.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The platform provisions AWS infrastructure, deploys a containerized microservices application, configures secure ingress with SSL, enables automatic scaling, and implements monitoring and centralized logging.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Objectives
 
-## Learning Laravel
+- Deploy AWS infrastructure using Terraform
+- Create a production-ready Amazon EKS cluster
+- Deploy a Laravel frontend and backend services
+- Deploy PostgreSQL database
+- Configure NGINX Ingress Controller
+- Enable HTTPS using SSL certificates
+- Configure Horizontal Pod Autoscaler (HPA)
+- Monitor workloads using Prometheus and Grafana
+- Centralize logs using Fluent Bit, Elasticsearch, and Kibana
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Architecture
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+Terraform
+      │
+      ▼
+AWS VPC
+      │
+      ▼
+Amazon EKS
+      │
+      ▼
+NGINX Ingress
+      │
+      ▼
+Laravel Frontend
+      │
+      ▼
+Laravel Backend API
+      │
+      ▼
+PostgreSQL
+      │
+      ├───────────────┐
+      ▼               ▼
+Prometheus         Fluent Bit
+      │               │
+      ▼               ▼
+Grafana        Elasticsearch
+                     │
+                     ▼
+                  Kibana
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+# Technologies Used
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Technology | Purpose |
+|------------|---------|
+| AWS | Cloud Platform |
+| Amazon EKS | Kubernetes Cluster |
+| Terraform | Infrastructure as Code |
+| Docker | Containerization |
+| Kubernetes | Container Orchestration |
+| Helm | Kubernetes Package Manager |
+| NGINX Ingress | External Traffic Routing |
+| cert-manager | SSL Certificates |
+| Prometheus | Metrics Collection |
+| Grafana | Monitoring Dashboard |
+| Fluent Bit | Log Collection |
+| Elasticsearch | Log Storage |
+| Kibana | Log Visualization |
+| PostgreSQL | Database |
+| Laravel | Web Application |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Project Structure
 
-## Security Vulnerabilities
+```
+project-root/
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+├── terraform/
+│   ├── vpc.tf
+│   ├── eks.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   └── providers.tf
+│
+├── kubernetes/
+│   ├── frontend/
+│   ├── backend/
+│   ├── database/
+│   ├── ingress/
+│   ├── monitoring/
+│   ├── logging/
+│   └── autoscaling/
+│
+├── docker/
+│
+├── screenshots/
+│
+└── README.md
+```
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Infrastructure
+
+## AWS Resources
+
+- Amazon VPC
+- Public Subnets
+- Private Subnets
+- NAT Gateway
+- Internet Gateway
+- Route Tables
+- Security Groups
+- IAM Roles
+- Amazon EKS Cluster
+- Managed Node Group
+
+---
+
+# Application Components
+
+## Frontend
+
+- Laravel Application
+- Docker Container
+- Kubernetes Deployment
+- Kubernetes Service
+
+## Backend API
+
+- Laravel REST API
+- Kubernetes Deployment
+- Kubernetes Service
+
+## Database
+
+- PostgreSQL
+- Persistent Volume
+- Persistent Volume Claim
+- StatefulSet
+
+---
+
+# Deployment
+
+## Clone Repository
+
+```bash
+git clone https://github.com/yourusername/project.git
+cd project
+```
+
+---
+
+## Initialize Terraform
+
+```bash
+cd terraform
+
+terraform init
+```
+
+---
+
+## Review Infrastructure
+
+```bash
+terraform plan
+```
+
+---
+
+## Deploy Infrastructure
+
+```bash
+terraform apply
+```
+
+---
+
+## Configure kubectl
+
+```bash
+aws eks update-kubeconfig \
+--region us-east-1 \
+--name production-cluster
+```
+
+---
+
+## Verify Cluster
+
+```bash
+kubectl get nodes
+```
+
+---
+
+## Deploy Applications
+
+```bash
+kubectl apply -f kubernetes/
+```
+
+---
+
+## Install NGINX Ingress
+
+```bash
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+helm install ingress-nginx ingress-nginx/ingress-nginx
+```
+
+---
+
+## Install Monitoring
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm install monitoring prometheus-community/kube-prometheus-stack
+```
+
+---
+
+## Install Logging
+
+Deploy
+
+- Fluent Bit
+- Elasticsearch
+- Kibana
+
+using Helm charts.
+
+---
+
+# Monitoring
+
+The project includes:
+
+- Cluster Metrics
+- Node Metrics
+- Pod Metrics
+- CPU Usage
+- Memory Usage
+- Network Usage
+- Storage Metrics
+
+Dashboard:
+
+- Grafana
+
+---
+
+# Logging
+
+Centralized logging pipeline:
+
+```
+Pods
+
+↓
+
+Fluent Bit
+
+↓
+
+Elasticsearch
+
+↓
+
+Kibana
+```
+
+---
+
+# Autoscaling
+
+Horizontal Pod Autoscaler
+
+- Minimum Replicas: 2
+- Maximum Replicas: 5
+- CPU Threshold: 70%
+
+---
+
+# Security
+
+- IAM Roles
+- Kubernetes RBAC
+- Security Groups
+- HTTPS
+- TLS Certificates
+- Kubernetes Secrets
+- Private Worker Nodes
+
+---
+
+# Screenshots
+
+Add screenshots of:
+
+- Terraform Apply
+- EKS Cluster
+- kubectl get nodes
+- Pods Running
+- Services
+- Ingress
+- Grafana Dashboard
+- Kibana Dashboard
+- HPA
+- AWS Console
+
+---
+
+# Future Improvements
+
+- GitHub Actions CI/CD
+- ArgoCD
+- AWS Load Balancer Controller
+- External Secrets
+- HashiCorp Vault
+- Service Mesh (Istio)
+- Cluster Autoscaler
+
+---
+
+# Author
+
+Amsettu Ibrahim
+
+Graduate Professional Diploma in DevOps & Cloud Engineering
+
+AWS | Kubernetes | Terraform | Docker | Laravel
+
+---
+
+# License
+
+MIT License
