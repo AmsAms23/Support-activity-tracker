@@ -1,5 +1,6 @@
-# Production-Grade Kubernetes Platform on AWS
+# Support Activity Tracker — Deployed on AWS EKS with Kubernetes
 
+A web application to log, track, and manage support activities for support teams. Built with Laravel (PHP) + PostgreSQL, and deployed as a production-ready platform on AWS using Terraform, Amazon EKS, Helm, and Kubernetes.
 ## Project Overview
 
 This project demonstrates how to build a production-ready Kubernetes platform on AWS using Infrastructure as Code (Terraform), Amazon EKS, Helm, and Kubernetes best practices.
